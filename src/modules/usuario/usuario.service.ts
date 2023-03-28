@@ -25,7 +25,6 @@ export class UsuarioService {
     public async registrarUsuario(usuario: CrearUsuarioDto, isAdmin:boolean = false): Promise<Object> {
         const {password, ...usuarioSinPass} = usuario;
         if(!isAdmin){
-            // Si no es admin, se debe validar que el area exista
             const areas = await this.baseDeDatos.area.findAll();
             if(!areas) this.exceptions.notFoundException({message: "No hay areas registradas. Por favor comuniquese con el administrador"})
         }
@@ -146,33 +145,7 @@ export class UsuarioService {
 
 
     async exportarSesionesTodos() {
-        /*const workbook = new excel.Workbook();
-        const worksheet = workbook.addWorksheet('Sesiones de todos los usuarios');
-        worksheet.columns = [
-            { header: 'ID', key: 'id', width: 10 },
-            { header: 'Nombre', key: 'nombre', width: 30 },
-            { header: 'Apellido', key: 'apellido', width: 30 },
-            { header: 'Correo', key: 'correo', width: 30 },
-            { header: 'Fecha de ingreso', key: 'fecha_ingreso', width: 30 },
-            { header: 'Fecha de expiración', key: 'fecha_expiracion', width: 30 },
-            { header: 'IP', key: 'ip', width: 30 },
-        ];
-
-        const sesionesDeTodosLosUsuarios: Object[] = await this.baseDeDatos.registrosDeUsuarios.findBy({}, {});
-        
-        sesionesDeTodosLosUsuarios.forEach( async (sesion) => {
-            // @ts-ignore
-            const {fecha_ingreso, fecha_expiracion, ip} = sesion;
-            // @ts-ignore
-            const {id, nombre, apellido, correo} = sesion.id_usuario;
-            
-
-            worksheet.addRow({ id, nombre, apellido, correo, fecha_ingreso, fecha_expiracion, ip });
-        });
-
-        return workbook;
-        */
-
+      
     }
 
 
